@@ -20,8 +20,4 @@ jobs:
         kubescape scan image nginx --format json > results.json
         cat results.json
 
-    - name: Upload Scan Results
-      uses: actions/upload-artifact@v2.3.1
-      with:
-        name: kubescape-results
-        path: results.json
+   
