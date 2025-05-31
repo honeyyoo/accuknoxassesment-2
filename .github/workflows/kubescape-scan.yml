@@ -12,12 +12,10 @@ jobs:
 
     - name: Install Kubescape
       run: |
-        curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
+        curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | bash
         kubescape version
 
-    - name: Run Scan
+    - name: Run Scan (no cluster)
       run: |
         kubescape scan image nginx --format json > results.json
         cat results.json
-
-   
