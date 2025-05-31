@@ -1,0 +1,26 @@
+name: Kubescape Scan
+
+on:
+  workflow_dispatch:
+
+jobs:
+  kubescape-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Install Kubescape
+      run: |
+        curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
+        kubescape version
+
+    - name: Run Scan
+      run: |
+        kubescape scan framework nsa --format json --output results.json
+
+    - name: Upload Scan Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: kubescape-results
+        path: results.json
